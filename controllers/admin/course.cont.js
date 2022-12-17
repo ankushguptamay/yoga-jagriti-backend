@@ -1,5 +1,5 @@
 const db = require("../../models");
-const fileHelper = require("../../util/delete.file");
+const fileHelper = require("../../util/delete.single.file");
 const Course = db.course;
 
 exports.addCourse = async (req, res) => {
@@ -44,14 +44,14 @@ exports.deleteCourse = async (req, res) => {
         if (!courses) {
             return res.send(`Fail to delete: Id is not present`);
         }
-        fileHelper.deleteFile(courses.image);
+        fileHelper.deleteSingleFile(courses.image);
         await courses.destroy();
         res.status(200).send(`Course deleted with Id: ${id}`);
     } catch (err) {
         res.status(500).send({ message: err.message });
     }
 }
-// /home/rajat_gupta5/Ankush/yoga-jagriti/resources/save-images/1671191606431-Screenshot from 2022-12-05 13-05-35.png
+// /home/rajat_gupta5/Ankush/yoga-jagriti/resources/save-single-images/1671191606431-Screenshot from 2022-12-05 13-05-35.png
 
 exports.updateCourse = async (req, res) => {
     try {
@@ -63,7 +63,7 @@ exports.updateCourse = async (req, res) => {
             return res.send(`Fail to update: Id is not present`);
         }
         if (req.file) {
-            fileHelper.deleteFile(courses.image);
+            fileHelper.deleteSingleFile(courses.image);
             imagePath = req.file.filename;
         }
         await courses.update({

@@ -1,5 +1,5 @@
 const db = require("../../models");
-const fileHelper = require("../../util/delete.file");
+const fileHelper = require("../../util/delete.single.file");
 const HomeBanner = db.homebanner;
 
 exports.addHomeBanner = async (req, res) => {
@@ -37,7 +37,7 @@ exports.deleteBanner = async (req, res) => {
         if (!homeBanners) {
             return res.send(`Fail to delete: Id is not present`);
         }
-        fileHelper.deleteFile(homeBanners.image);
+        fileHelper.deleteSingleFile(homeBanners.image);
 
         await homeBanners.destroy();
         res.status(200).send(`Banner deleted with Id: ${id}`);
@@ -57,7 +57,7 @@ exports.updateBanner = async (req, res) => {
             return res.send(`Fail to update: Id is not present`);
         }
         if (req.file) {
-            fileHelper.deleteFile(homeBanners.image);
+            fileHelper.deleteSingleFile(homeBanners.image);
             imagePath = req.file.filename;
         }
         await homeBanners.update({

@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT,
         },
         productImages: {
-            type: DataTypes.JSON,
+            type: DataTypes.TEXT,
         }
     })
     return Shop;
