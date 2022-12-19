@@ -29,6 +29,8 @@ module.exports = (app) => {
     router.post("/add-products", uploadMultiImage.array("productimages", 10), shop.addProduct);
     router.get("/products", shop.getAllProduct);
     router.delete("/delete-products/:id", shop.deleteProduct);
+    router.put("/delete-singeImage/:id", shop.deleteOnlyImages);
+
 
     router.post("/add-testimonies",  testimonial.addTestimonial);
     router.get("/testimonies", testimonial.getAllTestimonial);

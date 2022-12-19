@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const myEnv = require('dotenv').config();
 
 global.__basedir = __dirname;
 
@@ -22,7 +23,7 @@ app.use(cors(corsOptions));
 
 
 require('./routes/admin.route')(app);
-// app.use('/uploads', express.static('./resources/save-images'));
+app.use('/uploadimage', express.static('./resources/save-single-image'));
 // app.use(express.static(__dirname + "/public"));
 
 
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 
-PORT = process.env.PORT || 5000;
+PORT = myEnv.parsed.DEV_PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
