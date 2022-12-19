@@ -3,7 +3,6 @@ const multer = require("multer");
 
 var storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    console.log(file);
     callback(null, path.join(`${__dirname}/../resources/save-multi-image`));
   },
   filename: (req, file, callback) => {

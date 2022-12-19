@@ -24,6 +24,7 @@ app.use(cors(corsOptions));
 
 require('./routes/admin.route')(app);
 app.use('/uploadimage', express.static('./resources/save-single-image'));
+app.use('/uploadsmulti', express.static('./resources/save-multi-image'));
 // app.use(express.static(__dirname + "/public"));
 
 
